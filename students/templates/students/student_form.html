@@ -1,0 +1,174 @@
+{% extends 'main.html' %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% block content %}
+<script>
+const doSubmit = () => {
+    document.getElementById("createStudent").submit()
+}
+function showElectric () {
+    document.getElementById("electric_card_input").style.display = "inline"
+    document.getElementById("paper_card_input").style.display = "none"
+}
+function showPaper() {
+    document.getElementById("paper_card_input").style.display = "inline"
+    document.getElementById("electric_card_input").style.display = "none"
+}
+</script>
+<style>
+    form, .row, label{
+        font-size: 15px;
+        letter-spacing: 1.2px;
+        font-weight: 400;
+    }
+</style>
+<div class="site-content">
+    <div class="content-area py-1">
+        <div class="container-fluid">
+            <h4>ثبت محصل جدید</h4>
+            <ol class="breadcrumb no-bg mb-1">
+                <li class="breadcrumb-item"><a href="#">داشبورد</a></li>
+                <li class="breadcrumb-item"><a href="#">لیست محصلین</a></li>
+                <li class="breadcrumb-item active">ثبت محصل جدید</li>
+            </ol>
+            <div class="box box-block bg-white">
+               <form action="" method="POST" enctype="multipart/form-data" id="createStudent">
+                {% csrf_token %}
+                <h3>مشخصات شخصی محصیل</h3>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label> آی دی محصیل </label>
+                        {% render_field form.kankor_id class="form-control"  %}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label> نام کامل </label>
+                        {% render_field form.first_name class="form-control" %}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label> نام پدر </label>
+                        {% render_field form.father_name class="form-control"  %}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>ولدیت </label>
+                        {% render_field form.grand_father_name class="form-control"  %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label> تخلص </label>
+                        {% render_field form.last_name class="form-control"  %}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label> زبان اصلی </label>
+                        {% render_field form.main_language class="form-control"  %}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>ملیت</label>
+                        {% render_field form.nationality class="form-control"  %}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>حالت مدنی</label>
+                        {% render_field form.status class="form-control"  %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label> جنسیت </label>
+                        {% render_field form.gender class="form-control"  %}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label> تاریخ تولد </label>
+                        {% render_field form.birth_year class="form-control"  %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        <label> آدرس اصلی </label>
+                        {% render_field form.main_address class="form-control"  %}
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label> آدرس فعلی </label>
+                        {% render_field form.current_address class="form-control"  %}
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label> عکس </label>
+                        {% render_field form.image class="form-control"  %}
+                    </div>
+                </div>
+                <h3>سوابق تعلیمی</h3>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label> مکتب </label>
+                        {% render_field form.school_name class="form-control"  %}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label> سال فراغت </label>
+                        {% render_field form.graduation_year_from_school class="form-control"  %}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>سال کانکور</label>
+                        {% render_field form.kankor_year class="form-control"  %}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>نمره کانکور</label>
+                        {% render_field form.kankor_score class="form-control"  %}
+                    </div>
+                </div>
+                <h3>مشخصات اقارب</h3>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label> نسبت </label>
+                        {% render_field form.relative class="form-control"  %}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>نام</label>
+                        {% render_field form.name class="form-control"  %}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>وظیفه</label>
+                        {% render_field form.job class="form-control"  %}
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label>شماره تماس</label>
+                        {% render_field form.relative_phone_number class="form-control"  %}
+                    </div>
+                </div>
+                <h3>تذکره</h3>
+                <hr>
+                <div id="electric_card_input" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-6 form-group offset-md-3 ">
+                            <label> نمبر تذکره </label>
+                            {% render_field form.national_id class="form-control"  %}
+                        </div>
+                    </div>
+                </div>
+                <div id="paper_card_input" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label>نمبر ثبت</label>
+                            {% render_field form.register_number class="form-control"  %}
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label>نمبر صفحه</label>
+                            {% render_field form.page_number class="form-control"  %}
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label>جلد</label>
+                            {% render_field form.volume class="form-control"  %}
+                        </div>
+                    </div></div>
+                </form>
+                <button class="btn btn-success" style="border-radius: 10px;" onclick="showElectric()"> تذکره الکترونیکی </button>
+                <button class="btn btn-primary mr-2" style="border-radius: 10px;" onclick="showPaper()" > تذکره کاغذی </button>
+                <button class="btn btn-secondary" style="border-radius: 10px;" onclick="doSubmit()" >ذخیره</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

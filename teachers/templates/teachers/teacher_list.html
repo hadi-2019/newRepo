@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .clickable-row{
+        cursor: pointer;
+    }
+    .clickable-row:hover{
+        background-color: lightgray;
+    }
+</style> 
+<div class="site-content">
+    <!-- Content -->
+    <div class="content-area py-1">
+        <div class="container-fluid">
+            <h4>لیست شاگردان</h4>
+            <ol class="breadcrumb no-bg mb-1">
+                <li class="breadcrumb-item"><a href="/">داشبورد</a></li>
+                <li class="breadcrumb-item active">لیست استادان</li>
+            </ol>
+            <div class="box box-block bg-white">
+                <a href="{% url 'teacher-create' %}" class="btn btn-info" style="border-radius: 10px;"> <span style="font-size: 17px;"> ثبت استاد جدید </span> <i class="fa fa-plus ml-1" style="font-size: 18px;"></i> </a>
+                <br>
+
+                <br>
+                <table class="table table-striped table-bordered dataTable" id="table-1">
+                    <thead>
+                        <tr>
+                            <th>نام کامل</th>
+                            <th>نام پدر</th>
+                            <th>شماره تماس</th>
+                            <th>ملیت</th>
+                            <th>حالت مدنی</th>
+                            <th>تخصص</th>
+                            <th>عکس</th>
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        {% for teacher in teachers %}
+                            <tr class="clickable-row" data-href="{% url 'teacher-detail' teacher.id %}">
+                                <td> {{ teacher.teacher_name }} - {{ teacher.last_name }} </td>
+                                <td> {{ teacher.father_name }} </td>
+                                <td> {{ teacher.phone_number }} </td>
+                                <td> {{ teacher.nationality }} </td>
+                                <td> {{ teacher.status }} </td>
+                                <td> داکترا </td>
+                                <td>
+                                    <img src="{{ teacher.image.url }}" style="width: 50px; height: 50px; border-radius: 50%;" alt="">    
+                                    <!-- <img src="{% static 'img/teacher/student_male.jpg' %}" alt="" style="width: 50px; height: 50px; border-radius: 50%;"> -->
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>                   
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const rows = document.querySelectorAll("tr[data-href]");
+        rows.forEach(row => {
+            row.addEventListener("click", () => {
+                window.location.href = row.dataset.href
+            })
+        })
+    })
+</script>
+
+{% endblock content %}

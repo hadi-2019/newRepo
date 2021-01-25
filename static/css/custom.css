@@ -1,0 +1,11 @@
+/** @format */
+
+/* menu font size 17px */
+
+.custom-scroll ul li {
+  font-size: 17px;
+  font-weight: bold;
+}
+.text-uppercase {
+  font-size: 26px;
+}

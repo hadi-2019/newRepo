@@ -1,0 +1,345 @@
+{% extends 'main.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+<div class="site-content">
+    <!-- Content -->
+    <div class="content-area py-1">
+        <div class="container-fluid">
+            <h4>معلومات عمومی استاد</h4>
+            <ol class="breadcrumb no-bg mb-1">
+                <li class="breadcrumb-item"><a href="/">داشبورد</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'teacher-list' %}">لیست استادان</a></li>
+                <li class="breadcrumb-item active">{{ teacher.teacher_name }} - {{ teacher.last_name }} </li>
+            </ol>
+            <div class="box box-block bg-white">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs nav-tabs-2">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#teacherGeneralInfo"><i class="ti-user text-muted mr-0-25"></i> معلومات عمومی</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#teacherEducationalInfo" data-toggle="tab"><i class="ti-package text-muted mr-0-25"></i> سوابق علمی استاد</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#teacherJobExp" data-toggle="tab"><i class="ti-package text-muted mr-0-25"></i> سوابق کاری استاد</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#teacherTeachingPlan" data-toggle="tab"><i class="ti-package text-muted mr-0-25"></i> پلان درسی استاد </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="tab"><i class="ti-package text-muted mr-0-25"></i> گزارشات  </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="teacherGeneralInfo" role="tabpanel">
+                                <!-- teacher general information -->
+                                <br>
+                                <h3>معلومات عمومی</h3>
+                                <hr>
+                                <form action="" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">نام</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.teacher_name class="form-control" %}
+                                            </div>
+                                        </div>            
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">نام پدر</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.father_name class="form-control" %}
+                                            </div>
+                                        </div>      
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">تخلص</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.last_name class="form-control" %}
+                                            </div>
+                                        </div>      
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">شماره تماس</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.phone_number class="form-control" %}
+                                            </div>
+                                        </div>      
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">ایمیل</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.email class="form-control" %}
+                                            </div>
+                                        </div>      
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">تاریخ تولد</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.birth_year class="form-control" %}
+                                            </div>
+                                        </div>      
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">محل تولد</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.birth_place class="form-control" %}
+                                            </div>
+                                        </div>      
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">جنسیت</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.gender class="form-control" %}
+                                            </div>
+                                        </div>      
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">حالت مدنی</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.status class="form-control" %}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">ملیت</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.nationality class="form-control" %}
+                                            </div>
+                                        </div>  
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">خدمت نظامی</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.army_job class="form-control" %}
+                                            </div>
+                                        </div> 
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">نمبر تذکره</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.national_id class="form-control" %}
+                                            </div>
+                                        </div> 
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">نمبر ثبت</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.register_number class="form-control" %}
+                                            </div>
+                                        </div> 
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">نمبر صفحه</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.page_number class="form-control" %}
+                                            </div>
+                                        </div> 
+                                        <div class="form-group row">
+                                            <label class="col-sm-4 col-form-label">جلد</label>
+                                            <div class="col-sm-8">
+                                                {% render_field form.volume class="form-control" %}
+                                            </div>
+                                        </div> 
+                                        
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img class="mx-1" src="{{ teacher.image.url }}" alt="" style="width: 140px; height: 150px; float: left; border: 1px solid gray;" >
+                                    </div>
+                                </div>
+                                <br>
+                                <button class="btn btn-outline-info" style="border-radius: 10px;" > <i class="fa fa-download"></i> </button>
+                                <button class="btn btn-outline-danger" style="border-radius: 10px;"> <i class="fa fa-trash"></i> </button>
+                                <button class="btn btn-outline-success" type="submit" style="border-radius: 10px;" > <i class="fa fa-save"></i> </button>
+                                </form>
+                                <!-- end teacher info -->
+                            </div>
+                            <div class="tab-pane" id="teacherEducationalInfo" role="tabpanel">
+                                <!-- teacher Educational info -->
+                                <br>
+                                <h3>سوابق علمی</h3>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <h4 class="ml-1 mt-1">دوره لیسه</h4>
+                                            <hr>
+                                            <table style="width: 95%;" class="mx-1" >
+                                                <tr>
+                                                    <th>نام مکتب</th>
+                                                    <td style="float: left;">{{ teacher.high_school_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>موقعیت</th>
+                                                    <td style="float: left;">{{ teacher.high_school_location }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>سال شروع</th>
+                                                    <td style="float: left;">{{ teacher.high_school_start }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>سال ختم</th>
+                                                    <td style="float: left;">{{ teacher.high_school_end }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>بخش</th>
+                                                    <td style="float: left;">{{ teacher.hight_school_field }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>فیصدی</th>
+                                                    <td style="float: left;"> % {{ teacher.high_school_percentage }}  </td>
+                                                </tr>
+                                            </table>
+                                            <br>
+                                            <button class="btn btn-info" style="border-radius: 10px; margin-right: 10px; margin-bottom: 5px;"> <i class="fa fa-download"></i> </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <h4 class="ml-1 mt-1">دوره لیسانس</h4>
+                                            <hr>
+                                            <table style="width: 95%;" class="mx-1" >
+                                                <tr>
+                                                    <th>نام مکتب</th>
+                                                    <td style="float: left;">{{ teacher.bachelor_university_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>موقعیت</th>
+                                                    <td style="float: left;">{{ teacher.bachelor_university_location }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>سال شروع</th>
+                                                    <td style="float: left;">{{ teacher.bachelor_start }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>سال ختم</th>
+                                                    <td style="float: left;">{{ teacher.bachelor_end }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>بخش</th>
+                                                    <td style="float: left;">{{ teacher.bachelor_field }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>فیصدی</th>
+                                                    <td style="float: left;"> % {{ teacher.bachelor_percentage }}  </td>
+                                                </tr>
+                                            </table>
+                                            <br>
+                                            <button class="btn btn-info" style="border-radius: 10px; margin-right: 10px; margin-bottom: 5px;"> <i class="fa fa-download"></i> </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" style="opacity: 0.2;">
+                                        <div class="card">
+                                            <h4 class="ml-1 mt-1">دوره ماستری</h4>
+                                            <hr>
+                                            <table style="width: 95%;" class="mx-1" >
+                                                <tr>
+                                                    <th>نام دانشگاه</th>
+                                                    <td style="float: left;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>موقعیت</th>
+                                                    <td style="float: left;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>سال شروع</th>
+                                                    <td style="float: left;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>سال ختم</th>
+                                                    <td style="float: left;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>بخش</th>
+                                                    <td style="float: left;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>فیصدی</th>
+                                                    <td style="float: left;"></td>
+                                                </tr>
+                                            </table>
+                                            <br>
+                                            <button class="btn btn-info" style="border-radius: 10px; margin-right: 10px; margin-bottom: 5px;"> <i class="fa fa-download"></i> </button>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-4" style="opacity: 0.2;" >
+                                        <div class="card">
+                                            <h4 class="ml-1 mt-1">دوره دکترا</h4>
+                                            <hr>
+                                            <table style="width: 95%;" class="mx-1" >
+                                                <tr>
+                                                    <th>نام دانشگاه</th>
+                                                    <td style="float: left;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>موقعیت</th>
+                                                    <td style="float: left;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>سال شروع</th>
+                                                    <td style="float: left;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>سال ختم</th>
+                                                    <td style="float: left;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>بخش</th>
+                                                    <td style="float: left;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>فیصدی</th>
+                                                    <td style="float: left;"></td>
+                                                </tr>
+                                            </table>
+                                            <br>
+                                            <button class="btn btn-info" style="border-radius: 10px; margin-right: 10px; margin-bottom: 5px;"> <i class="fa fa-download"></i> </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- end teacher educational info -->
+                            </div>
+                            <div class="tab-pane" id="teacherJobExp" role="tabpanel">
+                                <!-- teacher credit and attendance -->
+                                <div class="col-md-12">
+                                    <br>
+									<h5>تجارب کاری</h5>
+									<div class="table-responsive">
+										<table class="table table-bordered mb-0">
+											<thead>
+												<tr>
+													<th>شماره</th>
+													<th>عنوان </th>
+													<th>موقعیت </th>
+													<th>تاریخ شروع</th>
+													<th>تاریخ ختم</th>
+													<th>تصدیق نامه</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th scope="row">1</th>
+													<td>{{ teacher.job_position }}</td>
+													<td>{{ teacher.job_location }}</td>
+													<td>{{ teacher.job_start_date }}</td>
+													<td>{{ teacher.job_end_date }}</td>
+													<td>
+                                                        <img src="{{ teacher.recomandition_letter.url }}" alt="" style="width: 100px; height: 100px;" >
+                                                    </td>
+												</tr>
+												
+											</tbody>
+										</table>
+									</div>
+								</div>
+                                <!-- end teacher credit and attendance -->
+                            </div>
+                            <div class="tab-pane" id="teacherTeachingPlan" role="tabpanel">
+                                <br>
+                                <div class="" style="height: 500px;">
+                                    <h3>Loading...</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

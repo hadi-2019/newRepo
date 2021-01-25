@@ -1,0 +1,467 @@
+{% extends 'main.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<script>
+    function electricCard() {
+        document.getElementById("showElectric").style.display = "inline"
+        document.getElementById("showPaper").style.display = "none";
+    }
+    function paperCard(){
+        document.getElementById("showElectric").style.display = "none";
+        document.getElementById("showPaper").style.display = "inline";
+    }
+    function showMaster() {
+        document.getElementById("masterDegree").style.display = "inline"
+        document.getElementById("minusButton").style.display = "inline"
+        document.getElementById("plusButton").style.display = "none";
+        document.getElementById("plusPHDButton").style.display = "inline"
+    }
+    function hideMaster() {
+        document.getElementById("masterDegree").style.display = "none"
+        document.getElementById("plusButton").style.display = "inline"
+        document.getElementById("minusButton").style.display = "none";
+        document.getElementById("plusPHDButton").style.display = "none";
+        document.getElementById("minusPHDButton").style.display = "none";
+        document.getElementById("PHDDegree").style.display = "none";
+
+    }
+    function showPHD() {
+        document.getElementById("PHDDegree").style.display = "inline"
+        document.getElementById("plusPHDButton").style.display = "none"
+        document.getElementById("minusPHDButton").style.display = "inline"
+    }
+    function hidePHD() {
+        document.getElementById("PHDDegree").style.display = "none"
+        document.getElementById("plusPHDButton").style.display = "inline"
+        document.getElementById("minusPHDButton").style.display = "none"
+    }
+    function Dosubmit(){
+        document.getElementById("validation").submit()
+    }
+    function showjobExp2(){
+        document.getElementById("jobexp2").style.display = "inline";
+        document.getElementById("showNexJobExp").style.display = "none";
+        document.getElementById("hideNextExp").style.display = "inline";
+        document.getElementById("showThirdJobExp").style.display = "inline";
+    }
+    function hideJobExp2(){
+        document.getElementById("jobexp2").style.display = "none";
+        document.getElementById("showNexJobExp").style.display = "inline";
+        document.getElementById("hideNextExp").style.display = "none";
+        document.getElementById("showThirdJobExp").style.display = "inline";
+        document.getElementById("showThirdJobExp").style.display = "none";
+    }
+    function showjobExp3(){
+        document.getElementById("jobexp3").style.display = "inline";
+        document.getElementById("showThirdJobExp").style.display = "none";
+        document.getElementById("hideThirdJobExp").style.display = "inline";
+    }
+    function hideJobExp3(){
+        document.getElementById("jobexp3").style.display = "none";
+        document.getElementById("showThirdJobExp").style.display = "inline";
+        document.getElementById("hideThirdJobExp").style.display = "none";
+    }
+</script>
+
+<div class="site-content">
+    <!-- Content -->
+    <div class="content-area py-1">
+        <div class="container-fluid">
+            <h4>ثبت استادان</h4>
+				<ol class="breadcrumb no-bg mb-1">
+					<li class="breadcrumb-item"><a href="#">داشبورد</a></li>
+					<li class="breadcrumb-item"><a href="{% url 'teacher-list' %}">لیست استادان</a></li>
+					<li class="breadcrumb-item active">ثبت استاد جدید</li>
+				</ol>
+            <div class="box box-block bg-white">
+                <div class="box box-block bg-white">
+                    <div id="exampleValidator" class="wizard">
+                        <ul class="wizard-steps" role="tablist">
+                            <li class="active" role="tab">
+                              <span style="font-size: 17px; letter-spacing: 1.3px;" > معلومات شخصی استاد</span>
+                            </li>
+                            <li role="tab">
+                                <span style="font-size: 17px; letter-spacing: 1.3px;">سوابق تحصیلی استاد</span>
+                            </li>
+                            <li role="tab">
+                                <span style="font-size: 17px; letter-spacing: 1.3px;">تجربه کاری استاد</span>
+                            </li>
+                        </ul>
+                        <form id="validation" class="form-horizontal" method="POST" enctype="multipart/form-data" >
+                            {% csrf_token %}
+                            <div class="wizard-content">
+                                <div class="wizard-pane active" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">نام استاد</label>
+                                            {% render_field form.teacher_name class="form-control" placeholder="محمد" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">تخلص</label>
+                                            {% render_field form.last_name class="form-control" placeholder="محمدی" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">نام پدر</label>
+                                            {% render_field form.father_name class="form-control" placeholder="احمد" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">شماره تماس </label>
+                                            {% render_field form.phone_number class="form-control" placeholder="+93-777276256" %}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">ایمیل آدرس</label>
+                                            {% render_field form.email class="form-control" placeholder="email.gmail.com" type="email" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">تاریخ تولد</label>
+                                            {% render_field form.birth_year class="form-control" type="date" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">محل تولد</label>
+                                            {% render_field form.birth_place placeholder="غزنی، جاغوری" class="form-control" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">جنسیت </label>
+                                            {% render_field form.gender class="form-control" %}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">حالت مدنی</label>
+                                            {% render_field form.status class="form-control"  type="email" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">ملیت</label>
+                                            {% render_field form.nationality placeholder="افغان" class="form-control"  %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">خدمت نظامی</label>
+                                            {% render_field form.army_job class="form-control" %}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button onclick="electricCard()" class="btn btn-success" style="border-radius: 20px;" ><span style="font-size: 14px; letter-spacing: 1.2px;">تذکره الکترونیکی</span></button>
+                                    <button onclick="paperCard()" class="btn btn-info" style="border-radius: 20px;"><span style="font-size: 14px; letter-spacing: 1.2px;">تذکره کاغذی</span></button>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-3" style="display: none;" id="showElectric">
+                                            <div class="form-group">
+                                                <label>نمبر تذکره</label>
+                                                {% render_field form.national_id class="form-control" placeholder="239847" %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row" style="display: none;" id="showPaper">
+                                        <div class="col-md-4" >
+                                            <div class="form-group">
+                                                <label>نمبر ثبت</label>
+                                            {% render_field form.register_number class="form-control" placeholder="902021" %}
+                                            </div>                                        
+                                          
+                                        </div>
+                                        <div class="col-md-4" >
+                                            <div class="form-group">
+                                                <label>نمبر صفخه</label>
+                                            {% render_field form.page_number class="form-control" placeholder="100" %}
+                                            </div>                                        
+                                          
+                                        </div>
+                                        <div class="col-md-4" >
+                                            <div class="form-group">
+                                                <label>جلد</label>
+                                                {% render_field form.volume class="form-control" placeholder="9" %}
+                                            </div>                                        
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="wizard-pane" role="tabpanel">
+                                    <h3>معلومات دوره لیسه</h3>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">نام مکتب دوره لیسه</label>
+                                            {% render_field form.high_school_name class="form-control" placeholder="لیسه عالی معرفت" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">موقعیت</label>
+                                            {% render_field form.high_school_location class="form-control" placeholder="کابل" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">سال شروع دوره لیسه</label>
+                                            {% render_field form.high_school_start class="form-control" type="date" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">سال ختم دوره لیسه</label>
+                                            {% render_field form.high_school_end class="form-control" type="date" %}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">رشته</label>
+                                            {% render_field form.hight_school_field class="form-control" placeholder="عمومی" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">مدرک</label>
+                                            {% render_field form.high_school_diploma class="form-control" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">فیصدی دوره مکتب</label>
+                                            {% render_field form.high_school_percentage class="form-control" placeholder="100" %}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <h3>معلومات دوره لیسانس</h3>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">دانشگاه/پوهنتون</label>
+                                            {% render_field form.bachelor_university_name class="form-control" placeholder="پوهنتون کابل" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">موقعیت</label>
+                                            {% render_field form.bachelor_university_location class="form-control" placeholder="کابل" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">سال شروع دوره لیسانس</label>
+                                            {% render_field form.bachelor_start class="form-control" type="date" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">سال ختم دوره لیسانس</label>
+                                            {% render_field form.bachelor_end class="form-control" type="date" %}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">رشته</label>
+                                            {% render_field form.bachelor_field class="form-control" placeholder="کمپیوتر ساینس" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">دیپلوم</label>
+                                            {% render_field form.bachelor_diploma class="form-control" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">فیصدی دوره لیسانس</label>
+                                            {% render_field form.bachelor_percentage class="form-control" placeholder="100" %}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button onclick="showMaster()" class="btn btn-info" style="border-radius: 10px;" id="plusButton">
+                                        <i style="margin-top: 1px;" class=" fa fa-plus"></i>
+                                    </button>
+                                    <button onclick="hideMaster()" class="btn btn-danger" style="border-radius: 10px; display: none;" id="minusButton">
+                                        <i style="margin-top: 1px;" class=" fa fa-minus"></i>
+                                    </button>
+<br>
+                                    <div style="display: none;" id="masterDegree" >
+                                        <br>
+                                    <h3>معلومات دوره ماستری</h3>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">دانشگاه/پوهنتون</label>
+                                            {% render_field form.master_university_name class="form-control" placeholder="پوهنتون کابل" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">موقعیت</label>
+                                            {% render_field form.master_university_location class="form-control" placeholder="کابل" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">سال شروع دوره ماستری</label>
+                                            {% render_field form.master_start class="form-control" type="date" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">سال ختم دوره ماستری</label>
+                                            {% render_field form.master_end class="form-control" type="date" %}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">رشته</label>
+                                            {% render_field form.master_field class="form-control" placeholder="کمپیوتر ساینس" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">دیپلوم</label>
+                                            {% render_field form.master_diploma class="form-control" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">فیصدی دوره ماستری</label>
+                                            {% render_field form.master_percentage class="form-control" placeholder="100" %}
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <!-- phd -->
+                                    <br>
+                                    <button onclick="showPHD()" class="btn btn-info" style="border-radius: 10px; display: none;" id="plusPHDButton">
+                                        <i style="margin-top: 1px;" class=" fa fa-plus"></i>
+                                    </button>
+                                    <button onclick="hidePHD()" class="btn btn-danger" style="border-radius: 10px; display: none;" id="minusPHDButton">
+                                        <i style="margin-top: 1px;" class=" fa fa-minus"></i>
+                                    </button>
+<br>
+                                    <div style="display: none;" id="PHDDegree" >
+                                        <br>
+                                    <h3>معلومات دوره دکترا</h3>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">دانشگاه/پوهنتون</label>
+                                            {% render_field form.phd_university_name class="form-control" placeholder="پوهنتون کابل" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">موقعیت</label>
+                                            {% render_field form.phd_university_location class="form-control" placeholder="کابل" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">سال شروع دوره دکترا</label>
+                                            {% render_field form.phd_start class="form-control" type="date" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">سال ختم دوره دکترا</label>
+                                            {% render_field form.phd_end class="form-control" type="date" %}
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">رشته</label>
+                                            {% render_field form.phd_field class="form-control" placeholder="کمپیوتر ساینس" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">دیپلوم</label>
+                                            {% render_field form.phd_diploma class="form-control" %}
+                                        </div>
+                                        <div class="col-md-3 form-group mb-0">
+                                            <label for="">فیصدی دوره دکترا</label>
+                                            {% render_field form.phd_percentage class="form-control" placeholder="100" %}
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="wizard-pane" role="tabpanel">
+                                        <div class="row">
+                                            <div class="col-md-3 form-group mb-0">
+                                                <label for="">محل وظیفه</label>
+                                                {% render_field form.job_location class="form-control" placeholder="کمپنی روشن" %}
+                                            </div>
+                                            <div class="col-md-3 form-group mb-0">
+                                                <label for="">عنوان وظیفه</label>
+                                                {% render_field form.job_position class="form-control" placeholder="سافت ویر انجنیر" %}
+                                            </div>
+                                            <div class="col-md-3 form-group mb-0">
+                                                <label for="">تاریخ شروع</label>
+                                                {% render_field form.job_start_date class="form-control" type="date" %}
+                                            </div>
+                                            <div class="col-md-3 form-group mb-0">
+                                                <label for="">تاریخ ختم</label>
+                                                {% render_field form.job_end_date class="form-control" type="date" %}
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-3 form-group mb-0">
+                                                <label for="">ریکامندیشن</label>
+                                                {% render_field form.recomandition_letter class="form-control" %}
+                                            </div>
+                                            <div class="col-md-3 form-group mb-0">
+                                                <label for="">عکس</label>
+                                                {% render_field form.image class="form-control" %}
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <button onclick="showjobExp2()" id="showNexJobExp" class="btn btn-info" style="border-radius: 10px;"> <i class="fa fa-plus"></i> </button>
+                                        <button onclick="hideJobExp2()" class="btn btn-danger" id="hideNextExp" style="border-radius: 10px; display: none;"> <i class="fa fa-minus"></i> </button>
+                                        <br>
+                                        <!-- job experience two -->
+                                        <div id="jobexp2" style="display: none;">
+                                            <div class="row">
+                                                <div class="col-md-3 form-group mb-0">
+                                                    <label for="">محل وظیفه</label>
+                                                    {% render_field form.job_location class="form-control" placeholder="کمپنی روشن" %}
+                                                </div>
+                                                <div class="col-md-3 form-group mb-0">
+                                                    <label for="">عنوان وظیفه</label>
+                                                    {% render_field form.job_position class="form-control" placeholder="سافت ویر انجنیر" %}
+                                                </div>
+                                                <div class="col-md-3 form-group mb-0">
+                                                    <label for="">تاریخ شروع</label>
+                                                    {% render_field form.job_start_date class="form-control" type="date" %}
+                                                </div>
+                                                <div class="col-md-3 form-group mb-0">
+                                                    <label for="">تاریخ ختم</label>
+                                                    {% render_field form.job_end_date class="form-control" type="date" %}
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-3 form-group mb-0">
+                                                    <label for="">ریکامندیشن</label>
+                                                    {% render_field form.recomandition_letter class="form-control" %}
+                                                </div>
+                                                <div class="col-md-3 form-group mb-0">
+                                                    <label for="">عکس</label>
+                                                    {% render_field form.image class="form-control" %}
+                                                </div>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <br>
+                                        <button onclick="showjobExp3()" id="showThirdJobExp" class="btn btn-info" style="border-radius: 10px; display: none;"> <i class="fa fa-plus"></i> </button>
+                                        <button onclick="hideJobExp3()" class="btn btn-danger" id="hideThirdJobExp" style="border-radius: 10px; display: none;"> <i class="fa fa-minus"></i> </button>
+                                        <!-- job experience 3 -->
+                                        <div id="jobexp3" style="display: none;">
+                                            <div class="row">
+                                                <div class="col-md-3 form-group mb-0">
+                                                    <label for="">محل وظیفه</label>
+                                                    {% render_field form.job_location class="form-control" placeholder="کمپنی روشن" %}
+                                                </div>
+                                                <div class="col-md-3 form-group mb-0">
+                                                    <label for="">عنوان وظیفه</label>
+                                                    {% render_field form.job_position class="form-control" placeholder="سافت ویر انجنیر" %}
+                                                </div>
+                                                <div class="col-md-3 form-group mb-0">
+                                                    <label for="">تاریخ شروع</label>
+                                                    {% render_field form.job_start_date class="form-control" type="date" %}
+                                                </div>
+                                                <div class="col-md-3 form-group mb-0">
+                                                    <label for="">تاریخ ختم</label>
+                                                    {% render_field form.job_end_date class="form-control" type="date" %}
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-3 form-group mb-0">
+                                                    <label for="">ریکامندیشن</label>
+                                                    {% render_field form.recomandition_letter class="form-control" %}
+                                                </div>
+                                                <div class="col-md-3 form-group mb-0">
+                                                    <label for="">عکس</label>
+                                                    {% render_field form.image class="form-control" %}
+                                                </div>
+                                            </div>
+                                            <br>
+                                        </div>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        <button class="btn btn-secondary" onclick="Dosubmit()" >ذخیره</button>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
